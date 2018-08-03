@@ -8,6 +8,7 @@ file_to_open = data_folder_in / "election_data.csv"
 data_list = []
 with open(file_to_open, 'r', newline='') as f_o:
     reader = csv.reader(f_o)
+    csv_header = next(f_o)
     for row in reader:
         data_list.append(row)
 
@@ -16,7 +17,7 @@ cand_tot = []
 cand_per = []
 line_list = []
 
-for data in data_list[1:]:
+for data in data_list:
     if data[2] not in cand_list:
         cand_list.append(data[2])
         cand_tot.append(1)
@@ -39,7 +40,7 @@ line_list.append("-----------------------------\n")
 
 print(*line_list, sep = '')
 
-data_folder_out = Path("/01_Data_Analytics/Git_Clones/python-challenge/PyPoll/")
+data_folder_out = Path("/01_Data_Analytics/Git_Clones/03_Python/PyPoll/")
 file_to_write = data_folder_out / "Pollpy.txt"
 f_c = open(file_to_write, 'w')
 f_c.writelines(line_list)
